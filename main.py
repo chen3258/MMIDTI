@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 """
 The work is based on neoDTI, please visit the https://github.com/FangpingWan/NeoDTI for more details, including datasets.
-Thanks to Fangping Wan et al for their contributions.
+Thanks to Fangping Wan and others for their contributions.
 """
 import numpy as np
 import pickle
