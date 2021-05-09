@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """
-The work is based on NeoDTI, please visit the https://github.com/FangpingWan/NeoDTI for more details, including datasets.
+The work is based on the NeoDTI, visiting the https://github.com/FangpingWan/NeoDTI for more details, including datasets.
 Thanks to Fangping Wan and others for their contributions.
 """
 import numpy as np
