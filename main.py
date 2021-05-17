@@ -345,9 +345,9 @@ class Model_(object):
         z = Dense(512,activation='relu')(z)
         z = Dense(512,activation='relu')(z)
         z = Dense(1,activation='sigmoid')(z)
-        LocalDiscriminator = Model(z_in_drug,z)
-        z_f_1_scores_drug = LocalDiscriminator(tf.transpose(z_f_1_drug,(1,0)))
-        z_f_2_scores_drug = LocalDiscriminator(tf.transpose(z_f_2_drug,(1,0)))
+        LocalDiscriminator1 = Model(z_in_drug,z)
+        z_f_1_scores_drug = LocalDiscriminator1(tf.transpose(z_f_1_drug,(1,0)))
+        z_f_2_scores_drug = LocalDiscriminator1(tf.transpose(z_f_2_drug,(1,0)))
         local_info_loss_drug = -K.mean(K.log(z_f_1_scores_drug + 1e-6) + K.log(1 - z_f_2_scores_drug + 1e-6))
 
         z_in_protein = Input(shape=(3732,1024))
@@ -356,9 +356,9 @@ class Model_(object):
         z = Dense(512,activation='relu')(z)
         z = Dense(512,activation='relu')(z)
         z = Dense(1,activation='sigmoid')(z)
-        LocalDiscriminator = Model(z_in_protein,z)
-        z_f_1_scores_protein = LocalDiscriminator(tf.transpose(z_f_1_protein,(1,0)))
-        z_f_2_scores_protein = LocalDiscriminator(tf.transpose(z_f_2_protein,(1,0)))
+        LocalDiscriminator2 = Model(z_in_protein,z)
+        z_f_1_scores_protein = LocalDiscriminator2(tf.transpose(z_f_1_protein,(1,0)))
+        z_f_2_scores_protein = LocalDiscriminator2(tf.transpose(z_f_2_protein,(1,0)))
         local_info_loss_protein = -K.mean(K.log(z_f_1_scores_protein + 1e-6) + K.log(1 - z_f_2_scores_protein + 1e-6))
 
         # z_in_disease = Input(shape=(17618,1024))
@@ -383,7 +383,8 @@ class Model_(object):
         # z_f_2_scores_sideeffect = LocalDiscriminator(tf.transpose(z_f_2_sideeffect,(1,0)))
         # local_info_loss_sideeffect = -K.mean(K.log(z_f_1_scores_sideeffect + 1e-6) + K.log(1 - z_f_2_scores_sideeffect + 1e-6))
 
-        self.local_info_loss = (local_info_loss_drug + local_info_loss_protein) / 2
+        self.local_info_loss = local_info_loss_drug + local_info_loss_protein
+        #self.local_info_loss = (local_info_loss_drug + local_info_loss_protein) / 2
         #==============================================================
 
         #reconstructing networks
